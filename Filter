@@ -1,0 +1,49 @@
+Filter
+
+Lowercase Filter (solr.LowerCaseFilterFactory):
+
+	Mô tả: Chuyển đổi tất cả các chữ cái thành chữ thường.
+	Ví dụ:
+	Đầu vào: ["The", "Quick", "Brown", "Fox"]
+	Token đầu ra: ["the", "quick", "brown", "fox"]
+Stop Filter (solr.StopFilterFactory):
+
+	Mô tả: Loại bỏ từ dừng (stop words) từ danh sách đã định trước.
+	Ví dụ:
+	Đầu vào: ["The", "quick", "brown", "fox"]
+	Token đầu ra: ["quick", "brown", "fox"]
+Synonym Filter (solr.SynonymFilterFactory):
+
+	Mô tả: Thay thế token với các từ đồng nghĩa khác.
+	Ví dụ:
+	Đầu vào: ["big", "large"]
+	Token đầu ra: ["big", "large"]
+Stemming Filter (solr.StemmerOverrideFilterFactory):
+
+	Mô tả: Chuyển đổi từ về dạng gốc để mở rộng khả năng tìm kiếm.
+	Ví dụ:
+	Đầu vào: ["running", "runner"]
+	Token đầu ra: ["run", "run"]
+NGram Filter (solr.NGramFilterFactory):
+
+	Mô tả: Tạo ra các ngữ cảnh (n-grams) từ token.
+	Ví dụ:
+	Đầu vào: ["Solr"]
+	Token đầu ra (n-grams): ["S", "o", "l", "r", "So", "ol", "lr"]
+Shingle Filter (solr.ShingleFilterFactory):
+
+	Mô tả: Tạo các "shingles" (từ ghép) từ các token liên tiếp.
+	Ví dụ:
+	Đầu vào: ["quick", "brown", "fox"]
+	Token đầu ra: ["quick", "quick brown", "brown", "brown fox", "fox"]
+Edge NGram Filter (solr.EdgeNGramFilterFactory):
+
+	Mô tả: Tạo ra các ngữ cảnh (n-grams) từ đầu hoặc cuối của token.
+	Ví dụ:
+	Đầu vào: ["Solr"]
+	Token đầu ra (n-grams): ["S", "So", "Sol", "Solr"]
+	
+	
+*) Định nghĩa index và query bằng field type 
+
+su - solr -c 'export SOLR_AUTH_TYPE="basic" && export SOLR_AUTHENTICATION_OPTS="-Dbasicauth=solr:Ohmidas@123" && /opt/solr/bin/solr create -c mycol1 -n data_driven_schema_configs'
