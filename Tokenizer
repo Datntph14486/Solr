@@ -1,0 +1,43 @@
+Tokenizer Solr 
+
+Standard Tokenizer (solr.StandardTokenizerFactory):
+
+	Mô tả: Sử dụng các quy tắc chuẩn để tách các từ dựa trên các ký tự không phải chữ và khoảng trắng.
+	Ví dụ:
+	Đầu vào: "The quick brown fox jumps over the lazy dog."
+	Token đầu ra: ["The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"]
+	
+Whitespace Tokenizer (solr.WhitespaceTokenizerFactory):
+
+	Mô tả: Tách các từ bằng khoảng trắng.
+	Ví dụ:
+	Đầu vào: "The quick brown fox jumps over the lazy dog."
+	Token đầu ra: ["The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog."]
+	
+Letter Tokenizer (solr.LetterTokenizerFactory):
+
+	Mô tả: Chỉ giữ lại các ký tự chữ cái, loại bỏ các ký tự không phải chữ.
+	Ví dụ:
+	Đầu vào: "The 123 quick brown fox jumps over the lazy dog."
+	Token đầu ra: ["The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"]
+	
+Keyword Tokenizer (solr.KeywordTokenizerFactory):
+
+	Mô tả: Giữ lại toàn bộ đầu vào là một token.
+	Ví dụ:
+	Đầu vào: "The quick brown fox jumps over the lazy dog."
+	Token đầu ra: ["The quick brown fox jumps over the lazy dog."]
+	
+Path Hierarchy Tokenizer (solr.PathHierarchyTokenizerFactory):
+
+	Mô tả: Phù hợp cho việc xử lý các đường dẫn, tách các thành phần của đường dẫn thành các token.
+	Ví dụ:
+	Đầu vào: "/home/user/documents/file.txt"
+	Token đầu ra: ["/home", "/home/user", "/home/user/documents", "/home/user/documents/file.txt"]
+	
+NGram Tokenizer (solr.NGramTokenizerFactory):
+
+	Mô tả: Tạo ra các ngữ cảnh (n-grams) của từ.
+	Ví dụ:
+	Đầu vào: "Solr"
+	Token đầu ra (n-grams): ["S", "o", "l", "r", "So", "ol", "lr"]
