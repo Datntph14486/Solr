@@ -1,0 +1,39 @@
+Language analysis: 
+
+ Japanaese:
+	<fieldType name="text_ja" class="solr.TextField" autoGeneratePhraseQueries="false" positionIncrementGap="100">
+		<analyzer>
+			<tokenizer mode="search" name="japanese"/>
+			<filter name="japaneseBaseForm"/>
+			<filter tags="lang/stoptags_ja.txt" name="japanesePartOfSpeechStop"/>
+			<filter name="cjkWidth"/>
+			<filter ignoreCase="true" name="stop" words="lang/stopwords_ja.txt"/>
+			<filter minimumLength="4" name="japaneseKatakanaStem"/>
+			<filter name="lowercase"/>
+		</analyzer>
+	</fieldType>
+	
+	- <tokenizer mode="search" name="japanese"/>: Sử dụng Japanese Tokenizer (solr.JapaneseTokenizerFactory) trong chế độ tìm kiếm. 
+			Điều này sẽ phân tách văn bản tiếng Nhật thành các từ để lập chỉ mục và truy vấn.
+			
+	- <filter name="japaneseBaseForm"/>: Sử dụng Japanese Base Form Filter (solr.JapaneseBaseFormFilterFactory) để chuyển đổi từ về dạng cơ bản. 
+			Điều này giúp chuẩn hóa từ vựng để cải thiện khả năng tìm kiếm.
+			
+	- <filter tags="lang/stoptags_ja.txt" name="japanesePartOfSpeechStop"/>: Sử dụng Japanese Part-Of-Speech Stop Filter (solr.JapanesePartOfSpeechStopFilterFactory) 
+			để loại bỏ các từ loại từ ngữ không mong muốn dựa trên các thẻ từ loại được đánh dấu trong văn bản.
+			
+	- <filter name="cjkWidth"/>: Sử dụng CJK Width Filter (solr.CJKWidthFilterFactory) để điều chỉnh chiều rộng của ký tự CJK (Chinese, Japanese, Korean),
+			đảm bảo sự nhất quán trong việc so sánh văn bản.
+			
+	- <filter ignoreCase="true" name="stop" words="lang/stopwords_ja.txt"/>: Sử dụng Stop Filter (solr.StopFilterFactory) để loại bỏ các từ stopwords, 
+			với danh sách từ được xác định trong tệp "lang/stopwords_ja.txt".Điều này giúp làm sạch dữ liệu và giảm kích thước chỉ mục.
+			
+	- <filter minimumLength="4" name="japaneseKatakanaStem"/>: Sử dụng Japanese Katakana Stem Filter (solr.JapaneseKatakanaStemFilterFactory) để xử lý từ vựng chữ Katakana trong tiếng Nhật.
+	
+	- <filter name="lowercase"/>: Sử dụng Lowercase Filter (solr.LowerCaseFilterFactory) để chuyển đổi tất cả các ký tự thành chữ thường, giúp đảm bảo sự nhất quán trong việc so sánh văn bản.
+	
+		+ autoGeneratePhraseQueries="false": Tắt tự động tạo truy vấn cụm từ. Khi được tắt, Solr sẽ không tự động tạo các truy vấn cụm từ từ dữ liệu lập chỉ mục.
+		
+		+ positionIncrementGap="100": Khoảng cách giữa các vị trí của các từ trong trường. Cái này có thể ảnh hưởng đến cách Solr xử lý các từ liền kề trong trường.
+	
+*) Chỉ có thể query theo những từ mà filters cuối cùng trả ra 
